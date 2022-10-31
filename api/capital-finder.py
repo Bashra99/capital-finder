@@ -12,17 +12,17 @@ class handler(BaseHTTPRequestHandler):
 
        if 'country' in dictionary:
             country = dictionary['country']
-            url=f'https://restcountries.eu/rest/v3.1/name/{country}'
+            url=f'https://restcountries.com/v3.1/name/{country}'
             response = requests.get(url)
             data = response.json()
-            capital = data[0]['capital']
+            capital =str(data[0]['capital'][0])
             massage=f'The capital of {country} is {capital}.'
        elif 'capital' in dictionary:
             capital = dictionary['capital']
-            url=f'https://restcountries.eu/rest/v3.1/capital/{capital}'
+            url=f'https://restcountries.com/v3.1/capital/{capital}'
             response = requests.get(url)
             data = response.json()
-            country = data[0]['name']
+            country = data[0]['name']['common']
             massage=f'{capital} is the capital of {country}.'
        else:
            massage="please enter country or capital"
